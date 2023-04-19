@@ -23,19 +23,34 @@
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
+		},
+		{
+			"path": "pages/search/search", //搜索页面
+			"style": {
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent", //透明渐变导航栏 App-nvue 2.4.4+ 支持
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px", //输入框圆角
+							"placeholder": "请输入搜索内容",
+							"disabled": true //disable时点击输入框不置焦，可以跳到新页面搜索
+						}
+					}
+				}
+			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "黑马优购",
+		"navigationBarTitleText": "小彬小店",
 		"navigationBarBackgroundColor": "#C00000",
 		"backgroundColor": "#FFFFFF"
 	},
 	"uniIdRouter": {},
 	"tabBar": {
 		"selectedColor": "#C00000",
-		"list": [
-			{
+		"list": [{
 				"pagePath": "pages/home/home",
 				"text": "首页",
 				"iconPath": "static/tab_icons/home.png",

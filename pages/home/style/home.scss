@@ -1,0 +1,27 @@
+.home-wrap {
+	text-align: center;
+}
+.top-banner {
+	width: 750upx;
+	height: 320upx;
+	padding: 0 20upx;
+	box-sizing: border-box;
+}
+.top-banner image{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+}
+.nav-list {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	margin: 30upx 0;
+}
+
+.nav-item .nav-img {
+	display: block;
+	width: 120upx;
+	height: 120upx;
+	object-fit: cover;
+}
