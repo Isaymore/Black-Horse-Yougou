@@ -16,6 +16,10 @@
 </template>
 
 <script>
+	import {
+		getSwiperList,
+		getNavList
+	} from '@/api/home.js'
 	export default {
 		data() {
 			return {
@@ -28,33 +32,77 @@
 			this.getNavList()
 		},
 		methods: {
-			getSwiperList() {
-				this.$http
-					.get('/api/public/v1/home/swiperdata')
-					.then(res => {
-						console.log(res)
-						this.swiperList = res.message
-					})
-					.catch(error => {
-						console.log(error)
-					})
-			},
-			async getNavList() {
+			// getSwiperList() {
+			// 	this.$http
+			// 		.get('/api/public/v1/home/swiperdata')
+			// 		.then(res => {
+			// 			console.log(res)
+			// 			this.swiperList = res.message
+			// 		})
+			// 		.catch(error => {
+			// 			console.log(error)
+			// 		})
+			// },
+			async getSwiperList() {
 				try {
-					const res = await this.$http.get('/api/public/v1/home/catitems')
-					console.log('getNavList-res', res)
-					const {message, meta} = res
-					if(meta.status === 200){
-						this.navList = message
-					}else {
-						
+					const res = await getSwiperList()
+					console.log('getSwiperList-res', res)
+					if (res.meta.status === 200) {
+						this.swiperList = res.message
+					} else {
+						uni.showToast({
+							title: '获取轮播图失败',
+							icon: 'error',
+							duration: 2000
+						})
 					}
-					
 				} catch (e) {
 					//TODO handle the exception
-					console.log(e)
+					console.log('星爷-e', e, typeof e)
 				}
 
+			},
+			// async getNavList() {
+			// 	try {
+			// 		const res = await this.$http.get('/api/public/v1/home/catitems')
+			// 		console.log('getNavList-res', res)
+			// 		const {
+			// 			message,
+			// 			meta
+			// 		} = res
+			// 		if (meta.status === 200) {
+			// 			this.navList = message
+			// 		} else {
+
+			// 		}
+
+			// 	} catch (e) {
+			// 		//TODO handle the exception
+			// 		console.log('星爷-e', e, typeof e)
+			// 	}
+			// },
+			getNavList() {
+				try {
+					getNavList().then((res) => {
+						console.log('星爷-getNavList-res', res);
+						if (res.meta.status === 200) {
+							this.navList = res.message
+						} else {
+							uni.showToast({
+								title: '导航菜单失败',
+								icon: 'error',
+								duration: 2000
+							})
+						}
+						// throw new Error('报错了~')
+						// Promise.reject('抱歉，错误~')
+					}).catch((error) => {
+						console.log('星爷-error', error, typeof error)
+					})
+				} catch (e) {
+					//TODO handle the exception
+					console.log('星爷-e', e, typeof e)
+				}
 			},
 			navClick(item) {
 				if (item.name === '分类') {
