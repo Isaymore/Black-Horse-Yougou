@@ -20,3 +20,10 @@ export const getSwiperList = (params) => {
 export const getNavList = (params) => {
 	return http.get('/api/public/v1/home/catitems')
 }
+
+/**
+ * 查询楼层产品列表
+ */
+export const getFloorList = (params) =>{
+  return http.get('/api/public/v1/home/floordata')
+}
