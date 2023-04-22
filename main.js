@@ -3,8 +3,13 @@ import App from './App'
 import {
 	http
 } from '@/api/service.js'
+import {
+	showMsg
+} from 'utils/toast.js'
 // 挂载在Vue的原型对象上
 Vue.prototype.$http = http
+Vue.prototype.$showMsg = showMsg
+
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
