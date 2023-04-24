@@ -21,7 +21,7 @@
         <!-- 动态渲染三级分类的列表数据 -->
         <view class="cate-level-3">
           <!-- 三级分类 Item 项 -->
-          <view class="cate-level-3-item" v-for="obj in item.children" :key="ojb.cat_id">
+          <view class="cate-level-3-item" v-for="obj in item.children" :key="ojb.cat_id" @click="gotoGoodSList(item)">
             <!-- 图片 -->
             <image class="cate-level-3-img" :src="obj.cat_icon" mode="widthFix"></image>
             <!-- 文本 -->
@@ -72,9 +72,15 @@
         this.active = index;
         this.cateLevel2List = this.cateList[index].children
         // 让 scrollTop 的值在 0 与 1 之间切换
-        console.log('星爷-thisscrollTop-前',this.scrollTop)
+        console.log('星爷-thisscrollTop-前', this.scrollTop)
         // this.scrollTop = this.scrollTop ? 0 : 1
-        console.log('星爷-thisscrollTop-后',this.scrollTop)
+        console.log('星爷-thisscrollTop-后', this.scrollTop)
+      },
+      gotoGoodSList(item) {
+        console.log('星爷-gotoGoodSList-item', item)
+        uni.navigateTo({
+          url: `/subpkg/goods_list/goods_list?cat_id=${item.cat_id}`
+        })
       }
     }
   }
