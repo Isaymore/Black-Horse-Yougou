@@ -10,20 +10,20 @@ import {
  * 查询首页轮播图列表
  * 
  */
-export const getSwiperList = (params) => {
+export const getSwiperList = () => {
 	return http.get('/api/public/v1/home/swiperdata')
 }
 
 /**
  * 查询导航菜单列表
  */
-export const getNavList = (params) => {
+export const getNavList = () => {
 	return http.get('/api/public/v1/home/catitems')
 }
 
 /**
  * 查询楼层产品列表
  */
-export const getFloorList = (params) =>{
+export const getFloorList = () =>{
   return http.get('/api/public/v1/home/floordata')
 }
