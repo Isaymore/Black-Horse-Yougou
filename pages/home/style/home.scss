@@ -1,5 +1,11 @@
-page {
-  height: 3600px;
+.search-box {
+	// position: fixed;
+	// 粘性定位：设置定位效果为“吸顶”
+	position: sticky;
+	// 吸顶的位置
+	top: 0;
+	// 提高层级，防止被轮播图覆盖
+	z-index: 999;
 }
 .top-banner {
 	height: 320upx;
