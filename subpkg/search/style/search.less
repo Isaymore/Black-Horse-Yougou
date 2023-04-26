@@ -1,8 +1,9 @@
 .search-box {
   position: sticky;
   top: 0;
-	background-color: #c00000;
-	padding: 20rpx;
+  z-index: 999;
+  background-color: #c00000;
+  padding: 20rpx;
 	
 	.box {
 		display: flex;
@@ -15,7 +16,7 @@
 	}
 	
 	.input-box {  
-    flex: 1;
+		flex: 1;
 		margin-left: 10rpx;
 	}
 }
@@ -26,27 +27,34 @@
   .suggest-item {
     display: flex;
     justify-content: space-between;
+	align-items: center;
     padding: 20rpx 0;
     border-bottom: 2rpx solid #eee;
     
     .suggest-item-title {
-      width: 340px;
+	  // 文字不允许换行（单行文本）
       white-space: nowrap;
+	  // 溢出部分隐藏
       overflow: hidden;
+	  // 文本溢出后，使用 ... 代替
       text-overflow: ellipsis;
-      font-size: 24rpx;
+	  margin-right: 6rpx;
+	  font-size: 24rpx;
     }
   }
 }
 .search-history {
+	padding: 0 10rpx;
 	
 	.history-title {
 		display: flex;
 		justify-content: space-between;
-		padding: 16rpx;
+		align-items: center;
+		// padding: 16rpx;
+		height: 40px;
 		border-bottom: 2rpx solid #eee;
 		color: #80807f;
-    font-size: 24rpx;
+		font-size: 24rpx;
 	}
 	
 	.history-list {

@@ -7,6 +7,16 @@ import {
 } from '@/api/service.js'
 
 /**
+ * 商品搜索
+ * @param {object} params - 查询参数
+ */
+export const getSearchList = (params)=>{
+	return http.get('/api/public/v1/goods/qsearch', {
+		params
+	})
+}
+
+/**
  * 商品列表搜索
  * @param {object} params - 查询参数
  */
