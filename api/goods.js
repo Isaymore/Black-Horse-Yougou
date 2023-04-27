@@ -20,7 +20,7 @@ export const getSearchList = (params)=>{
  * 商品列表搜索
  * @param {object} params - 查询参数
  */
-export const searchGoodsList = (params) => {
+export const getGoodsList = (params) => {
   return http.get('/api/public/v1/goods/search', {
     params
   })
