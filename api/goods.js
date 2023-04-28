@@ -10,10 +10,10 @@ import {
  * 商品搜索
  * @param {object} params - 查询参数
  */
-export const getSearchList = (params)=>{
-	return http.get('/api/public/v1/goods/qsearch', {
-		params
-	})
+export const getSearchList = (params) => {
+  return http.get('/api/public/v1/goods/qsearch', {
+    params
+  })
 }
 
 /**
@@ -22,6 +22,16 @@ export const getSearchList = (params)=>{
  */
 export const getGoodsList = (params) => {
   return http.get('/api/public/v1/goods/search', {
+    params
+  })
+}
+
+/**
+ * 获取商品详情
+ * @param {object} params - 查询参数
+ */
+export const getGoodsDetail = (params) => {
+  return http.get('/api/public/v1/goods/detail', {
     params
   })
 }
