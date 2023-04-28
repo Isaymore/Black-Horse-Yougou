@@ -9,7 +9,7 @@
       <!-- 商品标题 -->
       <text class="goods-item--title">{{item.goods_name}}</text>
       <!-- 商品价格 -->
-      <text class="goods-item-price">￥{{item.goods_price}}</text>
+      <text class="goods-item-price">￥{{item.goods_price | tofixed}}</text>
     </view>
   </view>
 </template>
@@ -30,6 +30,12 @@
         // 默认的空图片
         defaultImg: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
       };
+    },
+    filters: {
+      // 将数字处理为带两位小数点的数字
+      tofixed(num) {
+        return Number(num).toFixed(2)
+      }
     }
   }
 </script>
