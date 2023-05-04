@@ -9,6 +9,29 @@
         </view>
       </swiper-item>
     </swiper>
+    <!-- 商品信息区域 -->
+    <view class="goods-info-box">
+      <!-- 商品价格 -->
+      <view class="goods-price">
+        ￥4099
+      </view>
+      <!-- 信息主体区域 -->
+      <view class="goods-info-body">
+        <!-- 商品名称 -->
+        <view class="goods-name">
+          官方的苟富贵官方的苟富贵官方的苟富贵官方的苟富贵
+        </view>
+        <!-- 收藏 -->
+        <view class="goods-collect">
+          <uni-icons type="star" color="gray" size="18"></uni-icons>
+          <text>收藏</text>
+        </view>
+      </view>
+      <!-- 运费 -->
+      <view class="goods-carriage">
+        快递：免运费
+      </view>
+    </view>
   </view>
 </template>
 
