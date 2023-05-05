@@ -6,6 +6,7 @@ import {
 import {
 	showMsg
 } from 'utils/toast.js'
+import store from '@/store/store.js'
 // 挂载在Vue的原型对象上
 Vue.prototype.$http = http
 Vue.prototype.$showMsg = showMsg
@@ -15,7 +16,8 @@ import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
-	...App
+	...App,
+  store // 将 Store实例 挂载到 Vue 实例上
 })
 app.$mount()
 // #endif
