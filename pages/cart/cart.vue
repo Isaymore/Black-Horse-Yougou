@@ -1,36 +1,25 @@
 <template>
-  <view class="cate-wrap">
-    <!-- 左侧的滚动视图区域 -->
-    <scroll-view class="cate-left" scroll-y="true">
-      <view class="cate-left-item active">电脑</view>
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-    </scroll-view>
-    <!-- 右侧的滚动视图区域 -->
-    <scroll-view class="cate-right" scroll-y="true">
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-      <view class="cate-left-item">电脑</view>
-    </scroll-view>
+  <view class="cart-wrap">
+
   </view>
 </template>
 
 <script>
+  import {
+    badgeMixin
+  } from '@/mixin/badge/index.js'
   export default {
+    // 将 badgeMixin 混入到当前的页面中进行使用
+    mixins: [badgeMixin],
     data() {
       return {
 
       }
     },
-    methods: {
-
-    }
+    methods: {}
   }
 </script>
 
 <style lang="scss">
-@import url('./style/cart.scss');
+  @import url('./style/cart.scss');
 </style>

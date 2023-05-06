@@ -53,12 +53,18 @@
         <!-- buttonGroup 右侧按钮组的配置项 -->
         <!-- @click 左侧的点击事件 -->
         <!-- @buttonClick 右侧按钮组的点击事件 -->
-        <uni-goods-nav fill :options="options" :buttonGroup="buttonGroup" @click="leftClick"></uni-goods-nav>
+        <uni-goods-nav fill :options="options" :buttonGroup="buttonGroup" @click="leftClick" @buttonClick="rightClick">
+        </uni-goods-nav>
     </view>
   </view>
 </template>
 
 <script>
+  // 按需引入 mapMutations 辅助函数
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
   import {
     getGoodsDetail
   } from '@/api/goods.js'
@@ -77,7 +83,8 @@
           },
           {
             icon: 'cart',
-            text: '购物车'
+            text: '购物车',
+            info: 0
           }
         ],
         // 右侧按钮组的配置对象
@@ -92,11 +99,31 @@
         }]
       };
     },
+    computed: {
+      ...mapGetters(['total'])
+    },
+    watch: {
+      // 1. 监听 total 值的变化
+      total: {
+        // 页面初次加载完毕后，立即调用侦听器
+        immediate: true,
+        handler(newVal) {
+          // 2. 通过数组的 find() 方法，找到购物车按钮的配置对象
+          const findResult = this.options.find(item => item.icon === 'cart')
+          // 3. 动态为购物车按钮的 info 属性赋值
+          if (findResult) {
+            findResult.info = newVal
+          }
+        }
+      }
+    },
     onLoad(option) {
-      console.log('星爷', option.goods_id)
       this.getGoodsDetail(option.goods_id)
     },
     methods: {
+      // 借助mapMutations生成与mutations对话的方法
+      // 将购物车模块中的 addToCart 方法映射到当前页面使用
+      ...mapMutations('cart', ['addToCart']),
       leftClick({
         index,
         content
@@ -108,11 +135,35 @@
           })
         }
       },
+      rightClick({
+        index,
+        content
+      }) {
+        // 1. 判断是否点击了 加入购物车 按钮
+        if (index === 0) {
+          // 2. 整理一个商品的信息对象
+          const {
+            goods_id,
+            goods_name,
+            goods_price,
+            goods_small_logo
+          } = this.goodsInfo
+          const goods = {
+            goods_id,
+            goods_name,
+            goods_price,
+            goods_small_logo,
+            goods_count: 1,
+            goods_state: true // 商品的勾选状态
+          }
+          // 3. 通过 this 调用映射过来的 addToCart 方法，将商品信息对象存储到购物车小仓库中
+          this.addToCart(goods)
+        }
+      },
       async getGoodsDetail(goods_id) {
         const res = await getGoodsDetail({
           goods_id
         })
-        console.log("星爷-res", res)
         if (res.meta.status !== 200) return this.$showMsg(res.meta.msg)
         this.goodsInfo = res.message
         // 使用字符串的 replace() 方法，为 img 标签添加行内的 style 样式，从而解决图片底部空白间隙的问题
