@@ -41,9 +41,13 @@
 
 <script>
 	import {
+		badgeMixin
+	} from '@/mixin/badge/index.js'
+	import {
 		getCateList
 	} from '@/api/cate.js'
 	export default {
+		mixins: [badgeMixin],
 		data() {
 			return {
 				// 动态计算窗口的剩余高度

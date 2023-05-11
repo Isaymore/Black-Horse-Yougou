@@ -7,7 +7,7 @@
     <!-- 商品右侧信息区域 -->
     <view class="goods-item-right">
       <!-- 商品标题 -->
-      <text class="goods-item--title">{{item.goods_name}}</text>
+      <text class="goods-item-title">{{item.goods_name}}</text>
       <!-- 商品价格 -->
       <text class="goods-item-price">￥{{item.goods_price | tofixed}}</text>
     </view>
@@ -61,7 +61,7 @@
       justify-content: space-between;
       margin-left: 20rpx;
 
-      .goods-item--title {
+      .goods-item-title {
         font-size: 24rpx;
       }
 
