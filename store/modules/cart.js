@@ -26,6 +26,14 @@ const mutations = {
   // 本地持久化存储购物车的商品列表
   saveToStorage: state => {
     uni.setStorageSync('cartList', state.cartList)
+  },
+  // 更新购物车中商品的勾选状态
+  updateGoodsState: (state, goods) => {
+    console.log('星爷-goods',goods)
+    const findResult = state.cartList.find(item => item.goods_id === goods.goods_id)
+    if (findResult) {
+      findResult.goods_state = goods.goods_state
+    }
   }
 }
 // actions方法
