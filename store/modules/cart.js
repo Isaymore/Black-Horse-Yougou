@@ -20,6 +20,7 @@ const mutations = {
       // 如果购物车中有这件商品，则只更新数量即可
       findResult.goods_count++
     }
+    // 持久化存储到本地
     // 通过 commit 方法，调用 cart 小仓库下的 saveToStorage 方法
     store.commit('cart/saveToStorage')
   },
@@ -29,10 +30,15 @@ const mutations = {
   },
   // 更新购物车中商品的勾选状态
   updateGoodsState: (state, goods) => {
-    console.log('星爷-goods',goods)
+    // 根据 goods_id 查询购物车中对应商品的信息对象
     const findResult = state.cartList.find(item => item.goods_id === goods.goods_id)
+    // 有对应的商品信息对象
     if (findResult) {
+      // 更新对应商品的勾选状态
       findResult.goods_state = goods.goods_state
+      // 持久化存储到本地
+      // 通过 commit 方法，调用 cart 小仓库下的 saveToStorage 方法
+      store.commit('cart/saveToStorage')
     }
   }
 }

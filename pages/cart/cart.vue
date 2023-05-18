@@ -8,8 +8,8 @@
       <text class="cart-title-text">购物车</text>
     </view>
     <!-- 商品列表区域 -->
-    <my-goods v-for="goods in cartList" :key="goods.goods_id" :goods="goods" :show-radio="true"
-      @radio-change="onRadioChange"></my-goods>
+    <my-goods v-for="goods in cartList" :key="goods.goods_id" :goods="goods" :show-radio="true" :show-number-box="true"
+      @radio-change="onRadioChange" @num-change="onNumChange"></my-goods>
   </view>
 </template>
 
@@ -35,9 +35,14 @@
     },
     methods: {
       ...mapMutations('cart', ['updateGoodsState']),
+      // 商品的勾选状态发生了变化
       onRadioChange(e) {
-        console.log('星爷-e', e)
+        // console.log('星爷-onRadioChange-e', e)
         this.updateGoodsState(e)
+      },
+      // 商品的数量发生了变化
+      onNumChange(e){
+        console.log('星爷-onNumChange-e', e)
       }
     }
   };

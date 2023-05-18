@@ -1,23 +1,19 @@
 <template>
-  <view class="my-goods-wrap">
+  <view class="goods-item-wrap">
     <!-- 商品左侧图片区域 -->
-    <view class="goods-left">
+    <view class="goods-item-left">
       <radio v-if="showRadio" color="#C00000" :checked="goods.goods_state" @click="onRadioClick" />
-      <image class="goods-left-img" :src="goods.goods_small_logo || defaultImg"></image>
+      <image class="goods-img" :src="goods.goods_small_logo || defaultImg"></image>
     </view>
     <!-- 商品右侧信息区域 -->
-    <view class="goods-right">
+    <view class="goods-item-right">
       <!-- 商品标题 -->
-      <text class="goods-right-title">{{goods.goods_name}}</text>
-      <view class="goods-price-num">
+      <text class="goods-name">{{goods.goods_name}}</text>
+      <view class="goods-info-box">
         <!-- 商品价格 -->
         <text class="goods-price">￥{{goods.goods_price}}</text>
         <!-- 商品数量 -->
-        <view class="goods-num-box">
-          <button class="goods-num-minus" size="mini">-</button>
-          <input class="goods-num-val" type="text" :value="goods.goods_count" />
-          <button class="goods-num-plus" size="mini">+</button>
-        </view>
+        <uni-number-box v-if="showNumberBox" v-model="goods.goods_count" :min="1" @change="onchange"></uni-number-box>
       </view>
     </view>
   </view>
@@ -34,6 +30,11 @@
       },
       // 是否展示图片左侧的 radio
       showRadio: {
+        type: Boolean,
+        default: false
+      },
+      // 是否展示价格右侧的 NumberBox 组件
+      showNumberBox: {
         type: Boolean,
         default: false
       }
@@ -54,53 +55,59 @@
           // 商品最新的勾选状态
           goods_state: !this.goods.goods_state
         })
+      },
+      onchange(val) {
+        console.log('星爷-onchange-val', val, typeof val)
+        const regex=/\d/
+        if(!regex.test(val)) return this.$showMsg('请输入正整数')
+        this.$emit('num-change', {
+          // 商品的 Id
+          goods_id: this.goods.goods_id,
+          // 商品最新的数量
+          goods_count: val
+        })
       }
     }
   };
 </script>
 
 <style lang="scss">
-  .my-goods-wrap {
+  .goods-item-wrap {
     display: flex;
     justify-content: space-between;
     padding: 20rpx;
     border-bottom: 2rpx solid #eee;
 
-    .goods-left {
+    .goods-item-left {
       display: flex;
       align-items: center;
       margin-right: 20rpx;
 
-      .goods-left-img {
+      .goods-img {
         width: 200rpx;
         height: 200rpx;
         object-fit: cover;
       }
     }
 
-    .goods-right {
+    .goods-item-right {
       flex: 1;
       display: flex;
       flex-direction: column;
-      // justify-content: space-between;
+      justify-content: space-between;
 
-      .goods-price-num {
+      .goods-name {
+        font-size: 26rpx;
+      }
+
+      .goods-info-box {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .goods-price {
           font-size: 32rpx;
-          color: #894057;
-          line-height: 80rpx;
-        }
-
-        .goods-num-box {
-          display: flex;
-          justify-content: space-between;
-          align-goodss: center;
-          width: 240rpx;
-          height: 80rpx;
-          text-align: center;
+          color: #c00000;
         }
       }
     }
