@@ -58,8 +58,6 @@
       },
       onchange(val) {
         console.log('星爷-onchange-val', val, typeof val)
-        const regex=/\d/
-        if(!regex.test(val)) return this.$showMsg('请输入正整数')
         this.$emit('num-change', {
           // 商品的 Id
           goods_id: this.goods.goods_id,
