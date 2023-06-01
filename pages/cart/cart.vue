@@ -49,7 +49,7 @@
       console.log('星爷-cartList', this.cartList)
     },
     methods: {
-      ...mapMutations('cart', ['updateGoodsState', 'updateGoodsCount']),
+      ...mapMutations('cart', ['updateGoodsState', 'updateGoodsCount','removeGoodsById']),
       // 商品的勾选状态发生了变化
       onRadioChange(e) {
         // console.log('星爷-onRadioChange-e', e)
@@ -62,7 +62,9 @@
       },
       // 点击了滑动操作按钮
       swipeActionClickHandler(goods) {
+        console.log('星爷-swipeActionClickHandler-cartList', this.cartList)
         console.log('星爷-swipeActionClickHandler-goods', goods)
+        // this.removeGoodsById(goods.goods_id)
       }
     }
   };
