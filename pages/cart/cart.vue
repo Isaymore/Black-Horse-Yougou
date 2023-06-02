@@ -1,5 +1,7 @@
 <template>
   <view class="cart-wrap">
+    <!-- 收货地址 -->
+    <my-address></my-address>
     <!-- 购物车商品列表的标题区域 -->
     <view class="cart-title">
       <!-- 左侧的图标 -->
@@ -11,12 +13,13 @@
     <!-- :right-options="item.options" -->
     <!-- uni-swipe-action 是最外层包裹性质的容器 -->
     <uni-swipe-action ref="swipeAction">
-      <!-- uni-swipe-action-item 可以为其子节点提供滑动操作的效果。需要通过options 属性来指定操作按钮的配置信息 -->
-      <uni-swipe-action-item v-for="(goods, index) in cartList" :key="goods.id" :right-options="options"
-        @click="swipeActionClickHandler(goods)">
-        <my-goods :goods="goods" :show-radio="true"
-          :show-number-box="true" @radio-change="onRadioChange" @num-change="onNumChange"></my-goods>
-      </uni-swipe-action-item>
+      <block v-for="goods in cartList" :key="goods.goods_id">
+        <!-- uni-swipe-action-item 可以为其子节点提供滑动操作的效果。需要通过options 属性来指定操作按钮的配置信息 -->
+        <uni-swipe-action-item :right-options="options" @click="swipeActionClickHandler($event, goods)">
+          <my-goods :goods="goods" :show-radio="true" :show-number-box="true" @radio-change="onRadioChange"
+            @num-change="onNumChange"></my-goods>
+        </uni-swipe-action-item>
+      </block>
     </uni-swipe-action>
   </view>
 </template>
@@ -45,26 +48,19 @@
     computed: {
       ...mapState('cart', ['cartList'])
     },
-    onLoad() {
-      console.log('星爷-cartList', this.cartList)
-    },
     methods: {
-      ...mapMutations('cart', ['updateGoodsState', 'updateGoodsCount','removeGoodsById']),
+      ...mapMutations('cart', ['updateGoodsState', 'updateGoodsCount', 'removeGoodsById']),
       // 商品的勾选状态发生了变化
       onRadioChange(e) {
-        // console.log('星爷-onRadioChange-e', e)
         this.updateGoodsState(e)
       },
       // 商品的数量发生了变化
       onNumChange(e) {
-        console.log('星爷-onNumChange-e', e)
         this.updateGoodsCount(e)
       },
       // 点击了滑动操作按钮
-      swipeActionClickHandler(goods) {
-        console.log('星爷-swipeActionClickHandler-cartList', this.cartList)
-        console.log('星爷-swipeActionClickHandler-goods', goods)
-        // this.removeGoodsById(goods.goods_id)
+      swipeActionClickHandler(e, goods) {
+        this.removeGoodsById(goods.goods_id)
       }
     }
   };

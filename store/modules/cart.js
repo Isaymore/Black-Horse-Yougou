@@ -1,3 +1,4 @@
+// 购物车相关的 vuex 模块
 import store from '@/store/store.js'
 const getDefaultState = () => ({
   // 购物车的商品列表，用来存储购物车中每个商品的信息对象
