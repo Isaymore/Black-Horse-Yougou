@@ -1,6 +1,6 @@
 <template>
 	<view class="cart-wrap">
-		<block v-if="cartList.length===0">
+		<block v-if="cartList.length">
 			<!-- 使用自定义的收货地址组件 -->
 			<my-address></my-address>
 			<!-- 购物车商品列表的标题区域 -->
