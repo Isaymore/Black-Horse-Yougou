@@ -154,7 +154,7 @@
             goods_price,
             goods_small_logo,
             goods_count: 1,
-            goods_state: true // 商品的勾选状态
+            goods_state: true // 商品的勾选状态，默认勾选
           }
           // 3. 通过 this 调用映射过来的 addToCart 方法，将商品信息对象存储到购物车小仓库中
           this.addToCart(goods)

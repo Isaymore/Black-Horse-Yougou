@@ -54,7 +54,7 @@
 <script>
   import {
     badgeMixin
-  } from '@/mixin/badge/index.js'
+  } from '@/mixins/badge/index.js'
   import {
     getSwiperList,
     getNavList,

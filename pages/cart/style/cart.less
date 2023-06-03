@@ -1,5 +1,7 @@
 .cart-wrap {
 	padding: 20rpx;
+	padding-bottom: 100rpx;
+
 	.cart-title {
 		display: flex;
 		align-items: center;
@@ -9,6 +11,32 @@
 		.cart-title-text {
 			margin-left: 20rpx;
 			font-size: 28rpx;
+		}
+	}
+
+	.empty-cart {
+		// 方法二：使用flex布局，水平居中
+		// 注意这里不能给width: 240rpx，如果给了width： 240rpx，需要使用margin: 0 auto实现块元素居中
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		// width: 240rpx;
+		padding-top: 100rpx;
+		// 方法一：水平居中
+		// margin: 0 auto;
+		// text-align: center;
+
+		&-img {
+			// width: 100%;
+			width: 240rpx;
+			// 说明：这里不用height：240rpx，是因为image组件的mode设置为widthFix
+			// widthFix的效果是保持图片的纵横比不变,图片给定宽度,高度自适应改变
+		}
+
+		&-tips {
+			margin-top: 32rpx;
+			font-size: 24rpx;
+			color: gray;
 		}
 	}
 }

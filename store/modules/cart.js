@@ -7,17 +7,6 @@ const getDefaultState = () => ({
 })
 // state数据
 const state = getDefaultState()
-// getters是为了简化数据而生
-const getters = {
-  // state是大仓库store的全局state对象,cart是小仓库
-  // 统计购物车中商品的总数量
-  total: state => {
-    let total = 0
-    // 循环遍历统计商品的数量，累加到变量 total 中 
-    state.cart.cartList.forEach(item => total += item.goods_count)
-    return total
-  }
-}
 // mutations方法，唯一修改state数据的方法
 const mutations = {
   // 每个mutation只能接收2个参数，一个是state对象，一个是提交mutation传过来的数据
@@ -48,9 +37,11 @@ const mutations = {
     if (findResult) {
       // 更新对应商品的勾选状态
       findResult.goods_state = goods.goods_state
-      // 持久化存储到本地
+      // 本地持久化存储
       // 通过 commit 方法，调用 cart 小仓库下的 saveToStorage 方法
       store.commit('cart/saveToStorage')
+	  // 通过 commit 方法，调用 cart 小仓库下的 setBadge 方法
+	  // store.commit('cart/setBadge')
     }
   },
   // 更新购物车中商品的数量
@@ -61,10 +52,11 @@ const mutations = {
     if (findResult) {
       // 更新对应商品的数量
       findResult.goods_count = goods.goods_count
-      // 持久化存储到本地
+      // 本地持久化存储
       // 通过 commit 方法，调用 cart 小仓库下的 saveToStorage 方法
       store.commit('cart/saveToStorage')
-      store.commit('cart/setBadge')
+	  // 通过 commit 方法，调用 cart 小仓库下的 setBadge 方法
+      // store.commit('cart/setBadge')
     }
   },
   // 根据 Id 从购物车中删除对应的商品信息
@@ -76,6 +68,7 @@ const mutations = {
   setBadge:() => {
     uni.setTabBarBadge({
       index: 2,
+	  // 这里可以使用store.getters.total,是因为getters是全局的
       text: store.getters.total.toString() // 注意：text 的值必须是字符串，不能是数字
     })
   }

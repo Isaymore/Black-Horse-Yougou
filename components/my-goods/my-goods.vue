@@ -57,7 +57,6 @@
         })
       },
       onchange(val) {
-        console.log('星爷-onchange-val', val, typeof val)
         this.$emit('num-change', {
           // 商品的 Id
           goods_id: this.goods.goods_id,
@@ -73,7 +72,7 @@
   .goods-item-wrap {
     display: flex;
     justify-content: space-between;
-    padding: 20rpx;
+    padding: 20rpx 0 20rpx 20rpx;
     border-bottom: 2rpx solid #eee;
 
     .goods-item-left {

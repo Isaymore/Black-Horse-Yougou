@@ -1,6 +1,6 @@
 {
     "name" : "uni-proj3",
-    "appid" : "",
+    "appid" : "__UNI__A8DA935",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -54,7 +54,11 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {},
+        "requiredPrivateInfos": [
+            "chooseAddress"
+        ]
     },
     "mp-alipay" : {
         "usingComponents" : true

@@ -5,7 +5,7 @@
       <button class="address-choose-btn" type="primary" size="mini" @click="chooseAddress">请选择收货地址+</button>
     </view>
     <!-- 收货信息的盒子 -->
-    <view class="address-info-box" v-else>
+    <view class="address-info-box" v-else @click="chooseAddress">
       <view class="top">
         <view class="receiver">
           收货人：{{addressInfo.userName}}
@@ -41,7 +41,9 @@
     computed: {
       // 把 user 模块中的 addressInfo 对象映射到当前组件中使用，代替 data 中addressInfo 对象
       ...mapState('user', ['addressInfo']),
-      ...mapGetters('addressDetail')
+	  // 提高代码的复用性，将收货详细地址抽离为getters，方便在多个页面和组件之间实现复用
+	  // 通过辅助函数mapGetters，将 user 模块中的 addressDetail 映射到当前组件中使用
+      ...mapGetters(['addressDetail'])
       // // 收货详细地址的计算属性
       // addressDetail() {
       //   let addressDetail = ''
@@ -53,6 +55,7 @@
       // }
     },
     methods: {
+		// 把 user 模块中的 updateAddressInfo 方法映射到当前组件中使用
       ...mapMutations('user', ['updateAddressInfo']),
       // 选择收货地址
       async chooseAddress() {
@@ -63,6 +66,7 @@
         if (error === null && success.errMsg === 'chooseAddress:ok') {
           // // 为 data 里面的收货地址对象赋值
           // this.addressInfo = success
+		  // 调用user 模块中的 updateAddressInfo 方法，将addressInfo更新保存到user 模块中
           this.updateAddressInfo(success)
         }
       }

@@ -1,23 +1,31 @@
 // 用户相关的 vuex 模块
+import store from '@/store/store.js'
 const getDefaultState = () => ({
-  // 收货地址对象
-  addressInfo: {}
+	// 收货地址对象
+	addressInfo: uni.getStorageSync('addressInfo') || {}
 })
 // state数据
 const state = getDefaultState()
 // mutations方法，唯一修改state数据的方法
 const mutations = {
-  // 每个mutation只能接收2个参数，一个是state对象，一个是提交mutation传过来的数据
-  updateAddressInfo: (state, addressInfo) => {
-    state.addressInfo = addressInfo
-  }
+	// 每个mutation只能接收2个参数，一个是state对象，一个是提交mutation传过来的数据
+	updateAddressInfo: (state, addressInfo) => {
+		state.addressInfo = addressInfo
+		// 本地持久化存储
+		// 通过 commit 方法，调用 user 小仓库下的 saveAddressToStorage 方法
+		store.commit('user/saveAddressToStorage')
+	},
+	// 本地持久化存储收货地址
+	saveAddressToStorage: state => {
+		uni.setStorageSync('addressInfo', state.addressInfo)
+	}
 }
 // actions方法
 const actions = {}
 export default {
-  // 开启命名空间
-  namespaced: true,
-  state,
-  mutations,
-  actions
+	// 开启命名空间
+	namespaced: true,
+	state,
+	mutations,
+	actions
 }

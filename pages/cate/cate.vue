@@ -28,7 +28,7 @@
 						<view class="cate-level-3-item" v-for="obj in item.children" :key="ojb.cat_id"
 							@click="gotoGoodSList(item)">
 							<!-- 图片 -->
-							<image class="cate-level-3-img" :src="obj.cat_icon" mode="widthFix"></image>
+							<image class="cate-level-3-img" :src="obj.cat_icon" mode=""></image>
 							<!-- 文本 -->
 							<text class="cate-level-3-txt">{{obj.cat_name}}</text>
 						</view>
@@ -42,7 +42,7 @@
 <script>
 	import {
 		badgeMixin
-	} from '@/mixin/badge/index.js'
+	} from '@/mixins/badge/index.js'
 	import {
 		getCateList
 	} from '@/api/cate.js'

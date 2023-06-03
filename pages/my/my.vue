@@ -7,7 +7,7 @@
 <script>
 	import {
 		badgeMixin
-	} from '@/mixin/badge/index.js'
+	} from '@/mixins/badge/index.js'
 	export default {
 		mixins: [badgeMixin],
 		data() {
