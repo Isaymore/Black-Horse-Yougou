@@ -2,7 +2,11 @@
 import store from '@/store/store.js'
 const getDefaultState = () => ({
 	// 收货地址对象
-	addressInfo: uni.getStorageSync('addressInfo') || {}
+	addressInfo: uni.getStorageSync('addressInfo') || {},
+	// 登录成功之后的 token 字符串
+	token: '',
+	// 用户信息对象
+	userInfo: {}
 })
 // state数据
 const state = getDefaultState()
@@ -18,6 +22,15 @@ const mutations = {
 	// 本地持久化存储收货地址
 	saveAddressToStorage: state => {
 		uni.setStorageSync('addressInfo', state.addressInfo)
+	},
+	updateUserInfo: (state, userInfo) => {
+		state.userInfo = userInfo
+		// 通过 commit 方法，调用 user 小仓库下的 saveUserInfoToStorage 方法
+		store.commit('user/saveUserInfoToStorage')
+	},
+	// 本地持久化存储用户信息
+	saveUserInfoToStorage: state => {
+		uni.setStorageSync('userInfo', state.userInfo)
 	}
 }
 // actions方法

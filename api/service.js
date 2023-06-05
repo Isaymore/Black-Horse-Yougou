@@ -3,7 +3,7 @@ import Request from '@/utils/luch-request/index.js'
 const http = new Request()
 http.setConfig(config => {
 	// 设置全局配置
-	config.baseURL = 'https://api-hmugo-web.itheima.net',
+	config.baseURL = 'https://api-hmugo-web.itheima.net', // 接口基础路径
 		config.header = {
 			...config.header,
 			a: 1,
