@@ -4,9 +4,9 @@ const getDefaultState = () => ({
 	// 收货地址对象
 	addressInfo: uni.getStorageSync('addressInfo') || {},
 	// 登录成功之后的 token 字符串
-	token: '',
+	token: uni.getStorageSync('token') || '',
 	// 用户信息对象
-	userInfo: {}
+	userInfo: uni.getStorageSync('userInfo') || {}
 })
 // state数据
 const state = getDefaultState()
@@ -31,6 +31,14 @@ const mutations = {
 	// 本地持久化存储用户信息
 	saveUserInfoToStorage: state => {
 		uni.setStorageSync('userInfo', state.userInfo)
+	},
+	updateToken: (state, token) => {
+		state.token = token
+		store.commit('user/saveTokenToStorage')
+	},
+	// 本地持久化存储登录token
+	saveTokenToStorage: state => {
+		uni.setStorageSync('token', state.token)
 	}
 }
 // actions方法

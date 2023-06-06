@@ -1,9 +1,9 @@
-<template>
+ <template>
 	<view class="my-user-info-wrap" :style="{ backgroundColor, height }">
 		<view class="avatar">
 			<image class="avatar-img" src="../../static/app.png" mode="widthFix"></image>
 		</view>
-		<text class="username">星爷</text>
+		<text class="nickname">星爷</text>
 	</view>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 		}
 	}
 	
-	.username {
+	.nickname {
 		color: #fff;
 	}
 }
