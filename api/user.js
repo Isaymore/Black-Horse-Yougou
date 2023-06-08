@@ -8,7 +8,8 @@ import {
 
 /**
  * 登录获取token
+ * @param (object) data - 参数
  */
-export const getLoginToken = data => {
+export const getLoginToken = (data) => {
 	return http.post('/api/public/v1/users/wxlogin', data)
 }

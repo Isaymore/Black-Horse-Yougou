@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import { getLoginToken } from '@/api/user.js';
 export default {
 	name: 'my-login',
@@ -20,6 +20,9 @@ export default {
 			canIUseGetUserProfile: false
 		};
 	},
+	computed: {
+		...mapState('user', ['redirectInfo'])
+	},
 	created() {
 		if (uni.getUserProfile) {
 			this.canIUseGetUserProfile = true;
@@ -27,7 +30,7 @@ export default {
 	},
 	methods: {
 		// 调用 mapMutations 辅助函数，将 user 小仓库中的 updateUserInfo 映射到 当前组件中使用
-		...mapMutations('user', ['updateUserInfo', 'updateToken']),
+		...mapMutations('user', ['updateUserInfo', 'updateToken', 'updateRedirectInfo']),
 		getUserProfile() {
 			// 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
 			// 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -67,7 +70,23 @@ export default {
 			// 原因：未授权用户，不能使用登录和支付等特殊接口，需要黑马官方在微信小程序管理后台授权，将你的微信账号添加为小程序的开发者
 			// this.getLoginToken(data);
 			// 更新vuex中的token
-			this.updateToken(res.code)
+			this.updateToken(res.code);
+			this.navigateBack();
+		},
+		// 导航返回登录之前的页面
+		navigateBack() {
+			// 导航方式为 switchTab
+			if (this.redirectInfo.openType === 'switchTab') {
+				// 调用小程序提供的 uni.switchTab() API 进行页面的导航
+				uni.switchTab({
+					// 要导航到的页面地址
+					url: this.redirectInfo.fromPage,
+					// 导航成功之后，把 vuex 中的 redirectInfo 对象重置为 null
+					complete: () => {
+						this.updateRedirectInfo({});
+					}
+				});
+			}
 		},
 		// 登录获取token
 		async getLoginToken(data) {
