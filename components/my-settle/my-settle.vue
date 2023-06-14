@@ -79,7 +79,7 @@ export default {
 				// 写死订单金额为 1 分钱
 				order_price: 0.01, // 订单金额
 				consignee_addr: this.addressDetail, // 收货地址
-				// 订单中包含的商品信息
+				// 订单中包含的商品列表信息
 				goods: this.selectedCartList.map((item) => ({ goods_id: item.goods_id, goods_price: item.goods_price, goods_number: item.goods_count }))
 			};
 			// 1.2 发起请求创建订单

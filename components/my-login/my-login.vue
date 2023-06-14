@@ -17,7 +17,8 @@ export default {
 	name: 'my-login',
 	data() {
 		return {
-			canIUseGetUserProfile: false
+			canIUseGetUserProfile: false,
+			token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEyLCJpYXQiOjE1MjU0MDIyMjMsImV4cCI6MTUyNTQ4ODYyM30.g-4GtEQNPwT_Xs0Pq7Lrco_9DfHQQsBiOKZerkO-O-o'
 		};
 	},
 	computed: {
@@ -70,7 +71,8 @@ export default {
 			// 原因：未授权用户，不能使用登录和支付等特殊接口，需要黑马官方在微信小程序管理后台授权，将你的微信账号添加为小程序的开发者
 			// this.getLoginToken(data);
 			// 更新vuex中的token
-			this.updateToken(res.code);
+			// this.updateToken(res.code);
+			this.updateToken(this.token);
 			this.navigateBack();
 		},
 		// 导航返回登录之前的页面
